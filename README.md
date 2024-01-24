@@ -1,4 +1,4 @@
-# sc-riskportal
+# e-commerce-portal
 
 ## Create .Net web app
 
