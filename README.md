@@ -53,5 +53,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## To test locally with Docker
 
 docker build -t local/bpmportal .
-docker run -it -p 8080:8080 local/bpmportal
+docker run -it -p 8080:8080 local/{appname}
 open http://localhost:8080 in browser
