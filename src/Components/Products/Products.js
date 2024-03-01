@@ -1,26 +1,45 @@
-import React, { useState } from "react";
-// import { ProductObj } from "./ProductsObj";
+import React, { useEffect, useState, useRef } from "react";
+import { ProductObj } from "./ProductsObj";
+
 
 const Products = (props) => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const productData = props.productObj;
+  const [cart, setCart] = useState([]);
+  const [productData, setProductData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [allCats, setAllCats] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log("productData: "+productData);
+  const button = useRef([])
+
+  useEffect(() => {
+    //call api to get the data 
+    setIsLoading(true);
+    console.log("setting product data")
+    //some process which is taking time to load 
+    setTimeout(() => {
+      console.log('Hello, World!');
+      setProductData(ProductObj);
+      setIsLoading(false)
+    }, 2000);
+  }, [])
+
+  useEffect(() => {
+    // Filtered product list based on selected category
+    setFilteredProducts(selectedCategory
+      ? productData.filter((product) => product.category === selectedCategory)
+      : productData);
+
+    setAllCats([...new Set(productData.map((data) => data.category))]);
+    console.log(allCats);
+  }, [productData, selectedCategory])
 
   // Function to handle category selection
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
 
-  // Filtered product list based on selected category
-  const filteredProducts = selectedCategory
-    ? productData.filter((product) => product.category === selectedCategory)
-    : productData;
 
-  var AllCats = productData.map((data) => data.category);
-  AllCats = [...new Set(AllCats)];
-  console.log(AllCats);
-  
   function truncateDescription(description, maxLength) {
     if (description.length <= maxLength) {
       return description;
@@ -28,6 +47,22 @@ const Products = (props) => {
     return description.substring(0, maxLength) + "...";
   }
 
+  const addToCart = (product, index) => {
+    if (button.current[index].innerText != "Added") {
+      setCart(prev => [...prev, product]);
+      props.cartValues(prev => [...prev, product]);
+      console.log("button", button.current)
+      button.current[index].className = "btn btn-sm btn-success";
+      button.current[index].innerText = "Added";
+    }
+  }
+  if (isLoading) {
+    return (
+      <div className="App-header">
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
   return (
     <>
       {/* Category filter */}
@@ -44,8 +79,8 @@ const Products = (props) => {
             {/* <select className='form-control'> */}
             <option value="">All Categories</option>
             {/* Assuming productData contains all possible categories */}
-            {console.log("inside Div: " + AllCats)}
-            {AllCats.map((filteredcat) => (
+            {console.log("inside Div: " + allCats)}
+            {allCats.map((filteredcat) => (
               <option key={filteredcat} value={filteredcat}>
                 {filteredcat}
               </option>
@@ -80,6 +115,11 @@ const Products = (props) => {
                     <strong>Rating:</strong> {product.rating.rate} &nbsp; (
                     {product.rating.count} reviews)
                   </p>
+                  {product.instock == false &&
+                    <p className="card-text text-danger">
+                      <strong>Out of stock</strong>
+                    </p>
+                  }
                   <div className="d-flex justify-content-between align-items-center mt-3">
                     <div className="btn-group">
                       <button
@@ -89,8 +129,13 @@ const Products = (props) => {
                         View
                       </button>
                       <button
+                        key={product.id}
+                        ref={(ref) => (button.current[index] = ref)}
+                        //ref={button[index]}
                         type="button"
+                        disabled={product.instock == false ? true : false}
                         className="btn btn-sm btn-outline-secondary"
+                        onClick={() => addToCart(product, index)}
                       >
                         Add to Cart
                       </button>
@@ -100,6 +145,7 @@ const Products = (props) => {
                 </div>
               </div>
             </div>
+
           ))}
         </div>
       </div>
