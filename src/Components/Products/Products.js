@@ -3,9 +3,11 @@ import React, { useState } from "react";
 
 const Products = (props) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [cart, setCart] = useState([]);
   const productData = props.productObj;
 
   console.log("productData: "+productData);
+  console.log("cartData: "+JSON.stringify(cart));
 
   // Function to handle category selection
   const handleCategoryChange = (category) => {
@@ -26,6 +28,11 @@ const Products = (props) => {
       return description;
     }
     return description.substring(0, maxLength) + "...";
+  }
+
+  const addToCart = (product) => {
+    setCart(prev => [...prev, product]);
+    props.cartValues(cart);    
   }
 
   return (
@@ -91,6 +98,7 @@ const Products = (props) => {
                       <button
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
+                        onClick={() => addToCart(product)}
                       >
                         Add to Cart
                       </button>
