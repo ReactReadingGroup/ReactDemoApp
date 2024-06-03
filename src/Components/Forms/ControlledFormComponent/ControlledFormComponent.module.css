@@ -1,0 +1,143 @@
+.heading {
+    padding-left: 0.6em;
+    padding-top: 0.6em;
+ }
+
+.productForm {
+    padding-left: 5%;
+}
+
+.fieldWrapper {
+    width: 50%;
+    display: inline-block;
+    padding: 0.6em;
+    input, label, textarea {
+        width: 90%       
+    };
+    input[type="checkbox"] {
+        accent-color: #198754;
+        width: auto;
+    }
+}
+
+.checkBoxWrapper {
+    vertical-align: top;
+    padding-top: 2.5em;
+}
+
+.fileUpload {
+    text-align: center;
+    border: 3px dashed rgb(210, 227, 244);
+    padding: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    margin-right: 5.6%;
+}
+
+.fileUpload p {
+    font-size: 0.87rem;
+    margin-top: 10px;
+    color: #bbcada;
+}
+
+.fileUpload input {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.uploadImg {
+    height: 3em;
+}
+
+.submitBtnWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.submitBtn {
+    background-color: green;
+    border: 0px;
+    color: white;
+    width: 25%;
+    box-shadow: 2px 2px 3px #959595;
+    height: 32px;
+}
+
+.submitBtn:disabled {
+    background-color: green;
+    border: 0px;
+    color: white;
+    width: 25%;
+    box-shadow: 2px 2px 3px #959595;
+    height: 32px;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.dropdown {
+    width: 90%;
+    height: 30px;
+}
+
+.checkboxLabel {
+    width: auto !important;
+    padding-right: 6px;
+    vertical-align: text-bottom;
+}
+
+.newProductWrapper {
+    border: 1px solid #b8b8b8;
+    border-radius: 8px;
+    padding-left: 1.2em;
+    margin-bottom: 2em;
+    box-shadow: 3px 3px 6px #dbdbdb;
+    margin-top: 2em;
+}
+
+.newProdHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 0.8em;
+}
+
+.newProdBtnGrp {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: end;
+    padding-top: 1em;
+}
+
+.actionBtns {
+    border: 0px;
+    color: white;
+    width: 5em;
+    border-radius: 6px;
+    box-shadow: 2px 2px 8px #878787;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.deleteBtn {
+    background-color: red;
+}
+
+.publishBtn {
+    background-color: #3131b8;
+}
+
+.error {
+    margin-bottom: 0;
+    font-size: 12px;
+    color: red;
+}
