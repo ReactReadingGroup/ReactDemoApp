@@ -60,3 +60,9 @@ footer {
 .catList{
   margin-left: 5px;
 }
+
+.stickyNavBar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
